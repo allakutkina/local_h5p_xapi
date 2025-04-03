@@ -1,5 +1,7 @@
 Moodle Plugin for logging the H5P activities
 
+!requires manual database upgrade after installation!
+
 Works with:
 - H5P embedded as an IFrame
 - H5P activity from mod_hvp plugin https://moodle.org/plugins/mod_hvp
@@ -10,3 +12,4 @@ Future developement:
 - error report 
 - appear only on pages containing h5p activities
 - exted to other custom activity?
+  
