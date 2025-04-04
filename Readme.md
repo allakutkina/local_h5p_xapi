@@ -1,6 +1,5 @@
 Moodle Plugin for logging the H5P activities
 
-!requires manual database upgrade after installation!
 
 Works with:
 - H5P embedded as an IFrame
