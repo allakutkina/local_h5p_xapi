@@ -13,21 +13,20 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-//
-// This file is part of the local_h5p_xapi plugin for Moodle
-//
-// This file contains the version information for the plugin
-// and is used by Moodle to manage plugin updates and compatibility.
-//
-// @package    local_h5p_xapi
 
-
-//The version file to tell moodle version info about the plugin
+/**
+ * Version information for the local_h5p_xapi plugin.
+ *
+ * @package    local_h5p_xapi
+ * @copyright  2025 Alla Kutkina, Dr. Björn Rudzewitz, 
+ *             Hector Research Institute of Education Sciences and Psychology
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_h5p_xapi';  
-$plugin->version = 2025040202;  
+$plugin->version = 2025041400;  
 $plugin->requires = 2022041900;
 $plugin->maturity = MATURITY_STABLE;
 $plugin->release = 2025040200;
