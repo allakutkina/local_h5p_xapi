@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMLDB PATH="local/H5P_XAPI/db/" VERSION="2025041400" COMMENT="H5P XAPI database schema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+    <TABLE NAME="h5p_xapi" COMMENT="Table for storing H5P xAPI statements">
+        <FIELDS>
+            <FIELD NAME="id" TYPE="INTEGER" PRIMARY_KEY="true" AUTOINCREMENT="true" COMMENT="Primary key"/>
+            <FIELD NAME="statement_id" TYPE="TEXT" NOTNULL="true" COMMENT="Unique identifier for the xAPI statement"/>
+            <FIELD NAME="statement_data" TYPE="TEXT" NOTNULL="true" COMMENT="JSON data of the xAPI statement"/>
+            <FIELD NAME="created_at" TYPE="INTEGER" NOTNULL="true" COMMENT="Timestamp when the statement was created"/>
+        </FIELDS>
+    </TABLE>
+
+
+
+
+</XMLDB>
