@@ -34,6 +34,7 @@ window.onload = function() {
             H5P.externalDispatcher.on('xAPI', (event) => {
                 console.log("caught xAPI event");
                 const statement = event.data.statement;
+                statement = addCourseId(statement); 
                 send($, statement);
             });
         } 
@@ -47,6 +48,7 @@ window.onload = function() {
                 if (iframes[i].src.indexOf('h5p') !== -1) {    
                     iframes[i].contentWindow.H5P.externalDispatcher.on('xAPI', (event) => {
                         const statement = event.data.statement;
+                        statement = addCourseId(statement); // Add course ID to the statement
                         send($, statement);
                     });
                 }
@@ -83,4 +85,13 @@ function send($, statement) {
             console.error('Failed to send xAPI statement:', error);
         }
     });
+}
+
+function addCourseId(statement) {
+    const courseId = M.cfg.courseId; // Retrieve the course ID from the Moodle configuration
+    if (courseId) {
+        statement.context.contextActivities = statement.statement.context.contextActivities || {}
+        statement.context.contextActivities.grouping = [{id: M.cfg.wwwroot + '/course/view.php?id=' + courseId}];
+    }
+    return statement;
 }

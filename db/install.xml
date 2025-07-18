@@ -11,8 +11,4 @@
             <FIELD NAME="created_at" TYPE="INTEGER" NOTNULL="true" COMMENT="Timestamp when the statement was created"/>
         </FIELDS>
     </TABLE>
-
-
-
-
 </XMLDB>
