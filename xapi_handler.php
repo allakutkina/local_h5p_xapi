@@ -39,6 +39,10 @@ if (empty($statementData) ||
     echo json_encode(['error' => 'Invalid xAPI statement']);
     exit;
 }
+//store the statement in the database if the statement is not accepted by LRS
+if (!$response) {
+    store_statement($statement);
+}
 
 // Send the statement to the LRS (function defined in lib.php).
 $response = send_statement($statement);
@@ -49,5 +53,7 @@ if ($response) {
 } else {
     http_response_code(500); // Internal Server Error
     echo json_encode(['error' => 'Failed to send xAPI statement to the LRS']);
+    store_statement($statement); // Store the statement in case of failure
 }
+
 

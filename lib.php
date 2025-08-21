@@ -92,3 +92,34 @@ function send_statement($statement) {
     return $response;
 }
 
+function store_statement($statement) {
+    global $DB;
+
+    // Prepare the statement data for storage
+    $data = new stdClass();
+    $data->statement_data = json_encode($statement);
+    // Insert the statement into the database
+    $DB->insert_record('h5p_xapi', $data);
+}
+
+/*
+* this function is responsible for re-sending failed xAPI statements
+* to the LRS (Learning Record Store).
+*/
+function resend_statements() {
+    //retrieve unsent statements from the database
+    global $DB;
+    $unsent_statements = $DB->get_records('h5p_xapi');
+
+    foreach ($unsent_statements as $statement) {
+        $response = send_statement(json_decode($statement->statement_data));
+
+        if ($response) {
+            // Mark the statement as sent
+            $statement->sent = 1;
+            $DB->update_record('h5p_xapi', $statement);
+        }
+    }
+}
+
+// TODO: how long to I store failed statements? Do I resend them regularly with cron? How is it done with logstore xAPI?
