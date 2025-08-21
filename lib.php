@@ -48,12 +48,27 @@ function send_statement($statement) {
     $endpoint = get_config('local_h5p_xapi', 'lrs_endpoint') ?? 'https://example.com/lrs';
     $username = get_config('local_h5p_xapi', 'lrs_username') ?? 'username';
     $password = get_config('local_h5p_xapi', 'lrs_password') ?? 'password';
-    
+    $use_username = get_config('local_h5p_xapi', 'id_schema') ?? 1;
     $url = $endpoint . '/statements';
     
     // Prepare the xAPI statement
-    
-    
+    global $USER;
+    $email = $USER->email;
+    $user = $USER->username;
+    global $PAGE;
+    $moodle_url = $PAGE->url->out();
+
+
+    if ($use_username) {
+        $statement['actor'] = [
+            'objectType' => 'Agent',
+            'account' => [
+                'name' => $user,
+                'homePage' => $moodle_url
+            ]
+        ];
+    }
+        
     // cURL setup
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -76,3 +91,4 @@ function send_statement($statement) {
     
     return $response;
 }
+
