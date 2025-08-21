@@ -34,17 +34,24 @@ if ($hassiteconfig) {
     get_string('lrs_endpoint_desc', 'local_h5p_xapi'), 
     'https://example.com/lrs', PARAM_URL));
 
-$settings->add(
+    $settings->add(
     new admin_setting_configtext('local_h5p_xapi/lrs_username', 
     get_string('lrs_username', 'local_h5p_xapi'), 
     get_string('lrs_username_desc', 'local_h5p_xapi'), 
     'username', PARAM_TEXT));
 
-$settings->add(
+    $settings->add(
     new admin_setting_configtext('local_h5p_xapi/lrs_password', 
     get_string('lrs_password', 'local_h5p_xapi'), 
     get_string('lrs_password_desc', 'local_h5p_xapi'), 
     'password', PARAM_TEXT));
+    // Add ID schema setting
+    $settings->add(
+        new admin_setting_configcheckbox('local_h5p_xapi/id_schema', 
+        get_string('id_schema', 'local_h5p_xapi'), 
+        get_string('id_schema_desc', 'local_h5p_xapi'), 
+        1)
+    );
 }
 
 $ADMIN->add('localplugins', $settings);
