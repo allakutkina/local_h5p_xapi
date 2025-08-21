@@ -30,3 +30,5 @@ $string['lrs_username'] = 'LRS Username';
 $string['lrs_username_desc'] = 'Enter the username for the LRS authentication.';
 $string['lrs_password'] = 'LRS Password';
 $string['lrs_password_desc'] = 'Enter the password for the LRS authentication.';
+$string['id_schema'] = 'Use username as identifier?';
+$string['id_schema_desc'] = 'Use the username as the identifier for xAPI statements. If unchecked, the email will be used instead.';
