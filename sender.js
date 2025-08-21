@@ -33,7 +33,7 @@ window.onload = function() {
             // listen for xAPI events from H5P content
             H5P.externalDispatcher.on('xAPI', (event) => {
                 console.log("caught xAPI event");
-                const statement = event.data.statement;
+                let statement = event.data.statement;
                 statement = addCourseId(statement); 
                 send($, statement);
             });
@@ -47,7 +47,7 @@ window.onload = function() {
             for (var i = 0; i < iframes.length; i++) { 
                 if (iframes[i].src.indexOf('h5p') !== -1) {    
                     iframes[i].contentWindow.H5P.externalDispatcher.on('xAPI', (event) => {
-                        const statement = event.data.statement;
+                        let statement = event.data.statement;
                         statement = addCourseId(statement); // Add course ID to the statement
                         send($, statement);
                     });
@@ -90,8 +90,12 @@ function send($, statement) {
 function addCourseId(statement) {
     const courseId = M.cfg.courseId; // Retrieve the course ID from the Moodle configuration
     if (courseId) {
-        statement.context.contextActivities = statement.statement.context.contextActivities || {}
+        statement.context.contextActivities = statement.context.contextActivities || {}
         statement.context.contextActivities.grouping = [{id: M.cfg.wwwroot + '/course/view.php?id=' + courseId}];
     }
     return statement;
 }
+
+/* example of course data
+[{"objectType":"Activity","id":"https://moodle.hector-kinderakademien.de/course/section.php?id=21","definition":{"type":"http://id.tincanapi.com/activitytype/section","name":{"en":"Course Test Section 4"}}},{"objectType":"Activity","id":"https://moodle.hector-kinderakademien.de/course/view.php?id=5","definition":{"type":"https://w3id.org/xapi/cmi5/activitytype/course","name":{"en":"Course Test"}}}]
+*/
