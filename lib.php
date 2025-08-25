@@ -91,14 +91,18 @@ function send_statement($statement) {
 
     // Send request and capture the response
     $response = curl_exec($ch);
+    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
     if (curl_errno($ch)) {
         // Log error if needed
         mtrace('cURL Error: ' . curl_error($ch));
     }
     curl_close($ch);
-    
-    
-    return $response;
+
+    // Return both the response and the HTTP code
+    return [
+        'httpcode' => $httpcode,
+        'response' => $response];
 }
 
 function store_statement($statement) {

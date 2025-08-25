@@ -33,13 +33,19 @@ $statement = required_param('statement', PARAM_RAW);
 
 
 // Send the statement to the LRS (function defined in lib.php).
-$response = send_statement($statement);
+$result = send_statement($statement);
 
 // Return the response from the LRS.
 // if returns error, store in the db
 
-if ($response) {
-    echo json_encode(['success' => true, 'response' => $response]);
+if ($result) {
+    if ($result['httpcode'] == 200) {
+        echo json_encode(['success' => true, 'response' => $result['response']]);
+    }
+    else {
+        echo json_encode(['success' => false, 'response' => $result['response']]);
+        store_statement($statement); // Store the statement in case of failure
+    }
 } else {
     http_response_code(503); // Service Unavailable
     echo json_encode(['error' => 'LRS is unavailable or did not respond']);
