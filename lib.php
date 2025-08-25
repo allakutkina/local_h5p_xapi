@@ -44,6 +44,15 @@ function local_h5p_xapi_extend_navigation(global_navigation $navigation) {
  */
 
 function send_statement($statement) {
+    $statementData = json_decode($statement, true);
+    if (empty($statementData) || 
+            !array_key_exists('actor', $statementData) || 
+            !array_key_exists('verb', $statementData) || 
+            !array_key_exists('object', $statementData)) {
+        http_response_code(400); 
+        echo json_encode(['error' => 'Invalid xAPI statement']);
+        exit;
+    }
     // Get plugin configuration settings
     $endpoint = get_config('local_h5p_xapi', 'lrs_endpoint') ?? 'https://example.com/lrs';
     $username = get_config('local_h5p_xapi', 'lrs_username') ?? 'username';
@@ -60,7 +69,7 @@ function send_statement($statement) {
 
 
     if ($use_username) {
-        $statement['actor'] = [
+        $statementData['actor'] = [
             'objectType' => 'Agent',
             'account' => [
                 'name' => $user,
@@ -78,7 +87,7 @@ function send_statement($statement) {
         'X-Experience-API-Version: 1.0.3'
     ]);
     curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $statement);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($statementData));
 
     // Send request and capture the response
     $response = curl_exec($ch);
@@ -97,9 +106,10 @@ function store_statement($statement) {
 
     // Prepare the statement data for storage
     $data = new stdClass();
+    $data->timestamp = time();
     $data->statement_data = json_encode($statement);
     // Insert the statement into the database
-    $DB->insert_record('h5p_xapi', $data);
+    $DB->insert_record('local_h5p_xapi', $data);
 }
 
 /*

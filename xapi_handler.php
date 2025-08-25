@@ -30,29 +30,19 @@ require_sesskey();
 $statement = required_param('statement', PARAM_RAW);
 
 // make sure we are getting a valid statement
-$statementData = json_decode($statement, true);
-if (empty($statementData) || 
-        !array_key_exists('actor', $statementData) || 
-        !array_key_exists('verb', $statementData) || 
-        !array_key_exists('object', $statementData)) {
-    http_response_code(400); 
-    echo json_encode(['error' => 'Invalid xAPI statement']);
-    exit;
-}
-//store the statement in the database if the statement is not accepted by LRS
-if (!$response) {
-    store_statement($statement);
-}
+
 
 // Send the statement to the LRS (function defined in lib.php).
 $response = send_statement($statement);
 
 // Return the response from the LRS.
+// if returns error, store in the db
+
 if ($response) {
     echo json_encode(['success' => true, 'response' => $response]);
 } else {
-    http_response_code(500); // Internal Server Error
-    echo json_encode(['error' => 'Failed to send xAPI statement to the LRS']);
+    http_response_code(503); // Service Unavailable
+    echo json_encode(['error' => 'LRS is unavailable or did not respond']);
     store_statement($statement); // Store the statement in case of failure
 }
 
