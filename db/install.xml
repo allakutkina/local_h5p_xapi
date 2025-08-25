@@ -6,7 +6,8 @@
     <TABLES>
         <TABLE NAME="h5p_xapi" COMMENT="Table for storing H5P xAPI statements">
             <FIELDS>
-                <FIELD NAME="id" TYPE="int" SEQUENCE="true" NOTNULL="true" COMMENT="Statement ID"/>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" SEQUENCE="true" NOTNULL="true" COMMENT="Statement ID"/>
+                <FIELD NAME="timestamp" TYPE= "int" LENGTH="10" SEQUENCE="true" NOTNULL="true" COMMENT="Statement stored timestamp"/>
                 <FIELD NAME="statement_data" TYPE="text" SEQUENCE="false" NOTNULL="true" COMMENT="JSON data of the xAPI statement"/>
             </FIELDS>
             <KEYS>
