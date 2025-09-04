@@ -44,6 +44,7 @@ function local_h5p_xapi_extend_navigation(global_navigation $navigation) {
  */
 
 function send_statement($statement) {
+    
     $statementData = json_decode($statement, true);
     if (empty($statementData) || 
             !array_key_exists('actor', $statementData) || 
@@ -93,9 +94,10 @@ function send_statement($statement) {
     $response = curl_exec($ch);
     $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
+    // fix this: it returns not found from the moodle, not the information from the LRS
     if (curl_errno($ch)) {
         // Log error if needed
-        mtrace('cURL Error: ' . curl_error($ch));
+        mtrace('cURL Error: ' . curl_error($ch)); 
     }
     curl_close($ch);
 

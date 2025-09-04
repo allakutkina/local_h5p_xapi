@@ -27,10 +27,10 @@ require_once(__DIR__ . '/../../config.php');
 require_once(__DIR__ . '/lib.php');
 
 require_sesskey();
+$PAGE->set_url(new moodle_url('/local/h5p_xapi/xapi_handler.php'));
+$PAGE->set_context(context_system::instance());
+
 $statement = required_param('statement', PARAM_RAW);
-
-// make sure we are getting a valid statement
-
 
 // Send the statement to the LRS (function defined in lib.php).
 $result = send_statement($statement);
