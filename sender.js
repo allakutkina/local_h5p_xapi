@@ -29,7 +29,7 @@
 
 window.onload = function() {
     require(['jquery'], function($) {
-        if (typeof H5P !== 'undefined') {
+        if (typeof H5P.externalDispatcher !== 'undefined') {
             // listen for xAPI events from H5P content
             H5P.externalDispatcher.on('xAPI', (event) => {
                 console.log("caught xAPI event");
