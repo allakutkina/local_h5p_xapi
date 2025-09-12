@@ -1,5 +1,4 @@
 <?php
-// Filepath: /home/kutkina/work/plugin/h5p_xapi/report.php
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -48,7 +47,7 @@ if ($resendid) {
             $resendresult = $OUTPUT->notification(get_string('resend_success', 'local_h5p_xapi'),
                  'notifysuccess');
         } else {
-            $resendresult = $OUTPUT->notification(get_string('resend_failed', 'local_h5p_xapi') 
+            $resendresult = $OUTPUT->notification(get_string('resend_failed', 'local_h5p_xapi')
                 . ': ' . ($result['response'] ?? ''), 'notifyproblem');
         }
     }
@@ -67,7 +66,7 @@ if (optional_param('resendbatch', 0, PARAM_INT)) {
             $fail++;
         }
     }
-    $resendresult .= $OUTPUT->notification(get_string('batch_resend_result', 'local_h5p_xapi', 
+    $resendresult .= $OUTPUT->notification(get_string('batch_resend_result', 'local_h5p_xapi',
         ['success' => $success, 'fail' => $fail]), $fail ? 'notifyproblem' : 'notifysuccess');
 }
 
@@ -117,7 +116,7 @@ $table->head = [
     get_string('id', 'local_h5p_xapi'),
     get_string('timestamp', 'local_h5p_xapi'),
     get_string('statement', 'local_h5p_xapi'),
-    get_string('actions', 'local_h5p_xapi'), 
+    get_string('actions', 'local_h5p_xapi'),
 ];
 
 foreach ($records as $record) {
