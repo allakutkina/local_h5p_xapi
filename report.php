@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
+
  * Report page for local_h5p_xapi plugin.
  *
  * @package    local_h5p_xapi
@@ -135,7 +136,7 @@ foreach ($records as $record) {
         $record->id,
         userdate($record->timestamp),
         '<pre style="max-width:400px;overflow:auto;">' . s($record->statement_data) . '</pre>',
-        $actions, 
+        $actions,
     ];
 }
 
