@@ -113,7 +113,7 @@ function store_statement($statement) {
     // Prepare the statement data for storage
     $data = new stdClass();
     $data->timestamp = time();
-    $data->statement_data = json_encode($statement);
+    $data->statement_data = $statement;
     // Insert the statement into the database
     $DB->insert_record('local_h5p_xapi', $data);
 }
