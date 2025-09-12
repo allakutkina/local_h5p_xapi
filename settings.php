@@ -49,7 +49,7 @@ if ($hassiteconfig) {
     get_string('lrs_password_desc', 'local_h5p_xapi'),
     'password', PARAM_TEXT));
 
-    // Add ID schema setting
+    // Add ID schema setting.
 
     $settings->add(
         new admin_setting_configcheckbox('local_h5p_xapi/id_schema',

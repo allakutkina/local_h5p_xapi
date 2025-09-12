@@ -25,7 +25,6 @@
  *
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -49,7 +48,7 @@ function local_h5p_xapi_extend_navigation(global_navigation $navigation) {
 function send_statement($statement) {
     
     $statementdata = json_decode($statement, true);
-    if (empty($statementdata) || 
+    if (empty($statementdata) ||
             !array_key_exists('actor', $statementdata) ||
             !array_key_exists('verb', $statementdata) ||
             !array_key_exists('object', $statementdata)) {
@@ -57,7 +56,7 @@ function send_statement($statement) {
         echo json_encode(['error' => 'Invalid xAPI statement']);
         exit;
     }
-    // Get plugin configuration settings
+    // Get plugin configuration settings.
 
     $endpoint = get_config('local_h5p_xapi', 'lrs_endpoint') ?? 'https://example.com/lrs';
     $username = get_config('local_h5p_xapi', 'lrs_username') ?? 'username';
@@ -65,7 +64,7 @@ function send_statement($statement) {
     $useusername = get_config('local_h5p_xapi', 'id_schema') ?? 1;
     $url = $endpoint . '/statements';
 
-    // Prepare the xAPI statement
+    // Prepare the xAPI statement.
 
     global $USER;
     $email = $USER->email;
@@ -80,10 +79,10 @@ function send_statement($statement) {
                 'name' => $user,
                 'homePage' => $moodleurl,
             ]
-        ,];
+            ,];
     }
 
-//...cURL setup
+    // CURL setup.
 
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -95,21 +94,21 @@ function send_statement($statement) {
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($statementdata));
 
-    // Send request and capture the response
+    // Send request and capture the response.
 
     $response = curl_exec($ch);
     $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-    // Fix this: it returns not found from the moodle, not the information from the LRS
+    // Fix this: it returns not found from the moodle, not the information from the LRS.
 
     if (curl_errno($ch)) {
-        // Log error if needed
+        // Log error if needed.
 
         mtrace('cURL Error: ' . curl_error($ch));
     }
     curl_close($ch);
 
-    // Return both the response and the HTTP code
+    // Return both the response and the HTTP code.
 
     return [
         'httpcode' => $httpcode,
@@ -117,29 +116,29 @@ function send_statement($statement) {
 }
 
 /**
- * Function store
+ * Methods that stores data in database
+ * @param string statment
  */
-
 function store_statement($statement) {
     global $DB;
 
-    // Prepare the statement data for storage
+    // Prepare the statement data for storage.
 
     $data = new stdClass();
     $data->timestamp = time();
     $data->statement_data = json_encode($statement);
-    // Insert the statement into the database
+    // Insert the statement into the database.
 
     $DB->insert_record('local_h5p_xapi', $data);
 }
 
-/*
+/** 
 * this function is responsible for re-sending failed xAPI statements
 * to the LRS (Learning Record Store).
+* @param string statment
 */
-
 function resend_statements() {
-    //Retrieve unsent statements from the database
+    // Retrieve unsent statements from the database.
 
     global $DB;
     $unsentstatements = $DB->get_records('h5p_xapi');
@@ -148,7 +147,7 @@ function resend_statements() {
         $response = send_statement(json_decode($statement->statement_data));
 
         if ($response) {
-            // Mark the statement as sent
+            // Mark the statement as sent.
             $statement->sent = 1;
             $DB->update_record('h5p_xapi', $statement);
         }

@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -39,7 +38,7 @@ $statement = required_param('statement', PARAM_RAW);
 $result = send_statement($statement);
 
 // Return the response from the LRS.
-// If returns error, store in the db
+// If returns error, store in the db.
 
 if ($result) {
     if ($result['httpcode'] == 200) {
@@ -47,15 +46,14 @@ if ($result) {
     }
     else {
         echo json_encode(['success' => false, 'response' => $result['response']]);
-        store_statement($statement); // Store the statement in case of failure
-
+        store_statement($statement); // Store the statement in case of failure.
     }
 } else {
-    http_response_code(503); // Service Unavailable
+    http_response_code(503); // Service Unavailable.
 
     echo json_encode(['error' => 'LRS is unavailable or did not respond']);
-    store_statement($statement); // Store the statement in case of failure
-    
+    store_statement($statement); // Store the statement in case of failure.
+
 }
 
 
