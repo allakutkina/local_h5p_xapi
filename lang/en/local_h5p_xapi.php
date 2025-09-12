@@ -18,17 +18,19 @@
  * Language strings for the local_h5p_xapi plugin.
  *
  * @package    local_h5p_xapi
+ * 
  * @copyright  2025 Alla Kutkina, Dr. Björn Rudzewitz, 
  *             Hector Research Institute of Education Sciences and Psychology
+ * 
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'H5P xAPI LRS Plugin';
 $string['lrs_endpoint'] = 'LRS Endpoint URL';
-$string['lrs_endpoint_desc'] = 'Enter the LRS endpoint URL to send xAPI statements.';
 $string['lrs_username'] = 'LRS Username';
-$string['lrs_username_desc'] = 'Enter the username for the LRS authentication.';
 $string['lrs_password'] = 'LRS Password';
+$string['lrs_username_desc'] = 'Enter the username for the LRS authentication.';
+$string['lrs_endpoint_desc'] = 'Enter the LRS endpoint URL to send xAPI statements.';
 $string['lrs_password_desc'] = 'Enter the password for the LRS authentication.';
 $string['id_schema'] = 'Use username as identifier?';
 $string['id_schema_desc'] = 'Use the username as the identifier for xAPI statements. If unchecked, the email will be used instead.';
+$string['pluginname'] = 'H5P xAPI LRS Plugin';

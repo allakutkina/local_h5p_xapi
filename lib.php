@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,11 +16,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * 
  * Plugin functions for the local_h5p_xapi plugin.
  *
  * @package    local_h5p_xapi
+ * 
  * @copyright  2025 Alla Kutkina, Dr. Björn Rudzewitz, 
  *             Hector Research Institute of Education Sciences and Psychology
+ * 
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,6 +31,7 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Callback function to include JavaScript on every page.
+ *  @package local_h5p_xapi
  */
 function local_h5p_xapi_extend_navigation(global_navigation $navigation) {
     global $PAGE;
@@ -42,7 +47,6 @@ function local_h5p_xapi_extend_navigation(global_navigation $navigation) {
  * @param array $statement The xAPI statement to send.
  * @return string The response from the LRS.
  */
-
 function send_statement($statement) {
     
     $statementData = json_decode($statement, true);
@@ -50,11 +54,12 @@ function send_statement($statement) {
             !array_key_exists('actor', $statementData) || 
             !array_key_exists('verb', $statementData) || 
             !array_key_exists('object', $statementData)) {
-        http_response_code(400); 
+        http_response_code(400);
         echo json_encode(['error' => 'Invalid xAPI statement']);
         exit;
     }
     // Get plugin configuration settings
+
     $endpoint = get_config('local_h5p_xapi', 'lrs_endpoint') ?? 'https://example.com/lrs';
     $username = get_config('local_h5p_xapi', 'lrs_username') ?? 'username';
     $password = get_config('local_h5p_xapi', 'lrs_password') ?? 'password';
@@ -62,6 +67,7 @@ function send_statement($statement) {
     $url = $endpoint . '/statements';
     
     // Prepare the xAPI statement
+    
     global $USER;
     $email = $USER->email;
     $user = $USER->username;
@@ -79,25 +85,28 @@ function send_statement($statement) {
         ];
     }
         
-    // cURL setup
+    //...cURL setup
+
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         'Authorization: Basic ' . base64_encode($username . ':' . $password),
         'Content-Type: application/json',
-        'X-Experience-API-Version: 1.0.3'
+        'X-Experience-API-Version: 1.0.3',
     ]);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($statementData));
 
     // Send request and capture the response
+
     $response = curl_exec($ch);
     $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
     // fix this: it returns not found from the moodle, not the information from the LRS
     if (curl_errno($ch)) {
         // Log error if needed
-        mtrace('cURL Error: ' . curl_error($ch)); 
+
+        mtrace('cURL Error: ' . curl_error($ch));
     }
     curl_close($ch);
 

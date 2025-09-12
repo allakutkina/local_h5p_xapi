@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -18,14 +19,16 @@
  * Handles incoming xAPI statements and forwards them to the LRS.
  *
  * @package    local_h5p_xapi
+ * 
  * @copyright  2025 Alla Kutkina, Dr. Björn Rudzewitz, 
  *             Hector Research Institute of Education Sciences and Psychology
+ * 
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require_once(__DIR__ . '/../../config.php');
 require_once(__DIR__ . '/lib.php');
-
+require_login();
 require_sesskey();
 $PAGE->set_url(new moodle_url('/local/h5p_xapi/xapi_handler.php'));
 $PAGE->set_context(context_system::instance());
@@ -36,7 +39,7 @@ $statement = required_param('statement', PARAM_RAW);
 $result = send_statement($statement);
 
 // Return the response from the LRS.
-// if returns error, store in the db
+// If returns error, store in the db
 
 if ($result) {
     if ($result['httpcode'] == 200) {
