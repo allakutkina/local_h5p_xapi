@@ -26,7 +26,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
-
 /**
  * Callback function to include JavaScript on every page.
  * @package local_h5p_xapi
@@ -131,7 +130,7 @@ function store_statement($statement) {
     $DB->insert_record('local_h5p_xapi', $data);
 }
 
-/** 
+/**
  * this function is responsible for re-sending failed xAPI statements
  * to the LRS (Learning Record Store).
  * @param string statment
