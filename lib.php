@@ -131,9 +131,8 @@ function resend_statements() {
         $response = send_statement(json_decode($statement->statement_data));
 
         if ($response) {
-            // Mark the statement as sent
-            $statement->sent = 1;
-            $DB->update_record('h5p_xapi', $statement);
+            // Instead of marking as sent, we delete the record
+            $DB->delete_records('h5p_xapi', ['id' => $statement->id]);
         }
     }
 }
