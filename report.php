@@ -69,6 +69,22 @@ if (optional_param('resendbatch', 0, PARAM_INT)) {
     $resendresult .= $OUTPUT->notification(get_string('batch_resend_result', 'local_h5p_xapi', ['success' => $success, 'fail' => $fail]), $fail ? 'notifyproblem' : 'notifysuccess');
 }
 
+// Handle individual remove.
+$removeid = optional_param('removeid', 0, PARAM_INT);
+$removeresult = '';
+if ($removeid) {
+    if ($DB->record_exists('local_h5p_xapi', ['id' => $removeid])) {
+        $DB->delete_records('local_h5p_xapi', ['id' => $removeid]);
+        $removeresult = $OUTPUT->notification(get_string('statement_removed', 'local_h5p_xapi'), 'notifysuccess');
+    }
+}
+
+// Handle clear all.
+if (optional_param('clearall', 0, PARAM_INT)) {
+    $DB->delete_records('local_h5p_xapi');
+    $removeresult .= $OUTPUT->notification(get_string('all_statements_removed', 'local_h5p_xapi'), 'notifysuccess');
+}
+
 // Fetch all records.
 $records = $DB->get_records('local_h5p_xapi');
 
@@ -81,10 +97,15 @@ if (!empty($resendresult)) {
 
 echo $OUTPUT->heading(get_string('report', 'local_h5p_xapi'));
 
-// Batch resend button.
-echo '<form method="post" action="' . $PAGE->url . '">';
+// Batch resend and clear all buttons.
+echo '<form method="post" action="' . $PAGE->url . '" style="display:inline">';
 echo '<input type="hidden" name="resendbatch" value="1" />';
 echo '<button type="submit">' . get_string('resend_all', 'local_h5p_xapi') . '</button>';
+echo '</form> ';
+
+echo '<form method="post" action="' . $PAGE->url . '" style="display:inline; margin-left:10px;">';
+echo '<input type="hidden" name="clearall" value="1" />';
+echo '<button type="submit" onclick="return confirm(\'' . get_string('confirm_clear_all', 'local_h5p_xapi') . '\');">' . get_string('clear_all', 'local_h5p_xapi') . '</button>';
 echo '</form>';
 
 // Table of statements.
@@ -100,7 +121,13 @@ foreach ($records as $record) {
     $actions = '<form method="post" action="' . $PAGE->url . '" style="display:inline">';
     $actions .= '<input type="hidden" name="resendid" value="' . $record->id . '" />';
     $actions .= '<button type="submit">' . get_string('resend', 'local_h5p_xapi') . '</button>';
+    $actions .= '</form> ';
+
+    $actions .= '<form method="post" action="' . $PAGE->url . '" style="display:inline">';
+    $actions .= '<input type="hidden" name="removeid" value="' . $record->id . '" />';
+    $actions .= '<button type="submit" onclick="return confirm(\'' . get_string('confirm_remove', 'local_h5p_xapi') . '\');">' . get_string('remove', 'local_h5p_xapi') . '</button>';
     $actions .= '</form>';
+
     $table->data[] = [
         $record->id,
         userdate($record->timestamp),
