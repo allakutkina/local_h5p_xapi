@@ -43,15 +43,18 @@ $result = send_statement($statement);
 if ($result) {
     if ($result['httpcode'] == 200) {
         echo json_encode(['success' => true, 'response' => $result['response']]);
-    }else {
+    }
+    else {
         echo json_encode(['success' => false, 'response' => $result['response']]);
         store_statement($statement); // Store the statement in case of failure.
-    }}else {
+    }
+}
+else {
     http_response_code(503); // Service Unavailable.
 
     echo json_encode(['error' => 'LRS is unavailable or did not respond']);
     store_statement($statement); // Store the statement in case of failure.
 
-}
+    }
 
 
