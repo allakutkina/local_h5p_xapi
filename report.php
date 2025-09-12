@@ -1,5 +1,5 @@
 <?php
-// filepath: /home/kutkina/work/plugin/h5p_xapi/report.php
+// Filepath: /home/kutkina/work/plugin/h5p_xapi/report.php
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -14,7 +14,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * Report page for local_h5p_xapi plugin.
  *
@@ -46,9 +45,11 @@ if ($resendid) {
     if ($record) {
         $result = send_statement($record->statement_data);
         if ($result && isset($result['httpcode']) && $result['httpcode'] == 200) {
-            $resendresult = $OUTPUT->notification(get_string('resend_success', 'local_h5p_xapi'), 'notifysuccess');
+            $resendresult = $OUTPUT->notification(get_string('resend_success', 'local_h5p_xapi'),
+                 'notifysuccess');
         } else {
-            $resendresult = $OUTPUT->notification(get_string('resend_failed', 'local_h5p_xapi') . ': ' . ($result['response'] ?? ''), 'notifyproblem');
+            $resendresult = $OUTPUT->notification(get_string('resend_failed', 'local_h5p_xapi') 
+                . ': ' . ($result['response'] ?? ''), 'notifyproblem');
         }
     }
 }
@@ -66,7 +67,8 @@ if (optional_param('resendbatch', 0, PARAM_INT)) {
             $fail++;
         }
     }
-    $resendresult .= $OUTPUT->notification(get_string('batch_resend_result', 'local_h5p_xapi', ['success' => $success, 'fail' => $fail]), $fail ? 'notifyproblem' : 'notifysuccess');
+    $resendresult .= $OUTPUT->notification(get_string('batch_resend_result', 'local_h5p_xapi', 
+        ['success' => $success, 'fail' => $fail]), $fail ? 'notifyproblem' : 'notifysuccess');
 }
 
 // Handle individual remove.
@@ -105,7 +107,8 @@ echo '</form> ';
 
 echo '<form method="post" action="' . $PAGE->url . '" style="display:inline; margin-left:10px;">';
 echo '<input type="hidden" name="clearall" value="1" />';
-echo '<button type="submit" onclick="return confirm(\'' . get_string('confirm_clear_all', 'local_h5p_xapi') . '\');">' . get_string('clear_all', 'local_h5p_xapi') . '</button>';
+echo '<button type="submit" onclick="return confirm(\'' . get_string('confirm_clear_all', 'local_h5p_xapi') . '\');">' .
+     get_string('clear_all', 'local_h5p_xapi') . '</button>';
 echo '</form>';
 
 // Table of statements.
@@ -114,7 +117,7 @@ $table->head = [
     get_string('id', 'local_h5p_xapi'),
     get_string('timestamp', 'local_h5p_xapi'),
     get_string('statement', 'local_h5p_xapi'),
-    get_string('actions', 'local_h5p_xapi')
+    get_string('actions', 'local_h5p_xapi'), 
 ];
 
 foreach ($records as $record) {
@@ -125,14 +128,15 @@ foreach ($records as $record) {
 
     $actions .= '<form method="post" action="' . $PAGE->url . '" style="display:inline">';
     $actions .= '<input type="hidden" name="removeid" value="' . $record->id . '" />';
-    $actions .= '<button type="submit" onclick="return confirm(\'' . get_string('confirm_remove', 'local_h5p_xapi') . '\');">' . get_string('remove', 'local_h5p_xapi') . '</button>';
+    $actions .= '<button type="submit" onclick="return confirm(\'' . get_string('confirm_remove', 'local_h5p_xapi') . '\');">'
+         . get_string('remove', 'local_h5p_xapi') . '</button>';
     $actions .= '</form>';
 
     $table->data[] = [
         $record->id,
         userdate($record->timestamp),
         '<pre style="max-width:400px;overflow:auto;">' . s($record->statement_data) . '</pre>',
-        $actions
+        $actions, 
     ];
 }
 
