@@ -26,11 +26,11 @@
  */
 
 $string['lrs_endpoint'] = 'LRS Endpoint URL';
-$string['lrs_password'] = 'LRS Password';
 $string['id_schema'] = 'Use username as identifier?';
+$string['id_schema_desc'] = 'Use the username as the identifier for xAPI statements. If unchecked, the email will be used instead.';
+$string['lrs_password'] = 'LRS Password';
 $string['lrs_endpoint_desc'] = 'Enter the LRS endpoint URL to send xAPI statements.';
 $string['lrs_username'] = 'LRS Username';
-$string['id_schema_desc'] = 'Use the username as the identifier for xAPI statements. If unchecked, the email will be used instead.';
 $string['lrs_password_desc'] = 'Enter the password for the LRS authentication.';
 $string['lrs_username_desc'] = 'Enter the username for the LRS authentication.';
 $string['pluginname'] = 'H5P xAPI LRS Plugin';

@@ -46,7 +46,6 @@ function local_h5p_xapi_extend_navigation(global_navigation $navigation) {
  * @return string The response from the LRS.
  */
 function send_statement($statement) {
-    
     $statementdata = json_decode($statement, true);
     if (empty($statementdata) ||
             !array_key_exists('actor', $statementdata) ||
@@ -79,7 +78,7 @@ function send_statement($statement) {
                 'name' => $user,
                 'homePage' => $moodleurl,
             ]
-            ,];
+            , ];
     }
 
     // CURL setup.
@@ -133,10 +132,10 @@ function store_statement($statement) {
 }
 
 /** 
-* this function is responsible for re-sending failed xAPI statements
-* to the LRS (Learning Record Store).
-* @param string statment
-*/
+ * this function is responsible for re-sending failed xAPI statements
+ * to the LRS (Learning Record Store).
+ * @param string statment
+ */
 function resend_statements() {
     // Retrieve unsent statements from the database.
 
