@@ -46,8 +46,7 @@ if ($result) {
     }else {
         echo json_encode(['success' => false, 'response' => $result['response']]);
         store_statement($statement); // Store the statement in case of failure.
-    }
-} else {
+    }}else {
     http_response_code(503); // Service Unavailable.
 
     echo json_encode(['error' => 'LRS is unavailable or did not respond']);
