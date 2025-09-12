@@ -29,12 +29,13 @@
 
 window.onload = function() {
     require(['jquery'], function($) {
-        if (typeof H5P.externalDispatcher !== 'undefined') {
+        if (typeof H5P !== 'undefined' && typeof H5P.externalDispatcher !== 'undefined') {
             // listen for xAPI events from H5P content
             H5P.externalDispatcher.on('xAPI', (event) => {
                 console.log("caught xAPI event");
                 let statement = event.data.statement;
-                statement = addCourseId(statement); 
+                statement = addCourseId(statement);
+                statement = addTimestamp(statement);
                 send($, statement);
             });
         } 
@@ -49,6 +50,7 @@ window.onload = function() {
                     iframes[i].contentWindow.H5P.externalDispatcher.on('xAPI', (event) => {
                         let statement = event.data.statement;
                         statement = addCourseId(statement); // Add course ID to the statement
+                        statement = addTimestamp(statement);
                         send($, statement);
                     });
                 }
@@ -93,6 +95,12 @@ function addCourseId(statement) {
         statement.context.contextActivities = statement.context.contextActivities || {}
         statement.context.contextActivities.grouping = [{id: M.cfg.wwwroot + '/course/view.php?id=' + courseId}];
     }
+    return statement;
+}
+
+function addTimestamp(statement) {
+    const timestamp = new Date().toISOString();
+    statement.timestamp = timestamp;
     return statement;
 }
 

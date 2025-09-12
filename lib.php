@@ -124,9 +124,8 @@ function store_statement($statement) {
 
     $data = new stdClass();
     $data->timestamp = time();
-    $data->statement_data = json_encode($statement);
+    $data->statement_data = $statement;
     // Insert the statement into the database.
-
     $DB->insert_record('local_h5p_xapi', $data);
 }
 
@@ -145,9 +144,8 @@ function resend_statements() {
         $response = send_statement(json_decode($statement->statement_data));
 
         if ($response) {
-            // Mark the statement as sent.
-            $statement->sent = 1;
-            $DB->update_record('h5p_xapi', $statement);
+            // Instead of marking as sent, we delete the record.
+            $DB->delete_records('h5p_xapi', ['id' => $statement->id]);
         }
     }
 }
