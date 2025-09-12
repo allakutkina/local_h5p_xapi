@@ -58,4 +58,4 @@ function xmldb_local_h5p_xapi_upgrade($oldversion) {
     }
 
     return true;
-}       
+}
