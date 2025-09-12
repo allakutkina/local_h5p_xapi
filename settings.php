@@ -56,3 +56,11 @@ if ($hassiteconfig) {
 
 $ADMIN->add('localplugins', $settings);
 
+if ($hassiteconfig) {
+    $ADMIN->add('localplugins', new admin_externalpage(
+        'local_h5p_xapi_report',
+        get_string('report', 'local_h5p_xapi'),
+        new moodle_url('/local/h5p_xapi/report.php'),
+        'moodle/site:config'
+    ));
+}
