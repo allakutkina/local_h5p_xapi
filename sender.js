@@ -89,6 +89,13 @@ function send($, statement) {
     });
 }
 
+/**
+ * Adds the course ID to the xAPI statement's context.
+ *
+ * @param {Object} statement - The xAPI statement to modify.
+ * @returns {Object} The modified xAPI statement with course ID added.
+ */
+
 function addCourseId(statement) {
     const courseId = M.cfg.courseId; // Retrieve the course ID from the Moodle configuration
     if (courseId) {
@@ -98,12 +105,14 @@ function addCourseId(statement) {
     return statement;
 }
 
+/**
+ * Adds a timestamp to the xAPI statement.
+ *
+ * @param {Object} statement - The xAPI statement to modify.
+ * @returns {Object} The modified xAPI statement with timestamp added.
+ */
 function addTimestamp(statement) {
     const timestamp = new Date().toISOString();
     statement.timestamp = timestamp;
     return statement;
 }
-
-/* example of course data
-[{"objectType":"Activity","id":"https://moodle.hector-kinderakademien.de/course/section.php?id=21","definition":{"type":"http://id.tincanapi.com/activitytype/section","name":{"en":"Course Test Section 4"}}},{"objectType":"Activity","id":"https://moodle.hector-kinderakademien.de/course/view.php?id=5","definition":{"type":"https://w3id.org/xapi/cmi5/activitytype/course","name":{"en":"Course Test"}}}]
-*/

@@ -34,7 +34,6 @@ function xmldb_local_h5p_xapi_upgrade($oldversion) {
 
     $dbman = $DB->get_manager();
 
-    // Example version number, replace with your actual version.
     if ($oldversion < 2025091206) {
 
         // Define table local_h5p_xapi to be created.
