@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information for the local_h5p_xapi plugin.
+ * Version information for the logstore_h5p_xapi plugin.
  *
- * @package    local_h5p_xapi
+ * @package    logstore_h5p_xapi
  *
  * @copyright  2025 Alla Kutkina, Dr. Björn Rudzewitz,
  *             Hector Research Institute of Education Sciences and Psychology
@@ -27,9 +27,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_h5p_xapi';
-$plugin->version = 2025091208;
-$plugin->requires = 2022041900;
+$plugin->component = 'logstore_h5p_xapi';
+$plugin->version = 2025112502;
+$plugin->requires = 2022041900.00;
 $plugin->maturity = MATURITY_STABLE;
 $plugin->release = 2025040200;
 $plugin->supported = [401, 405];

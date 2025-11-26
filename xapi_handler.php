@@ -17,7 +17,7 @@
 /**
  * Handles incoming xAPI statements and forwards them to the LRS.
  *
- * @package    local_h5p_xapi
+ * @package    logstore_h5p_xapi
  *
  * @copyright  2025 Alla Kutkina, Dr. Björn Rudzewitz,
  *             Hector Research Institute of Education Sciences and Psychology
@@ -29,7 +29,7 @@ require_once(__DIR__ . '/../../config.php');
 require_once(__DIR__ . '/lib.php');
 require_login();
 require_sesskey();
-$PAGE->set_url(new moodle_url('/local/h5p_xapi/xapi_handler.php'));
+$PAGE->set_url(new moodle_url('/admin/tool/log/store/h5p_xapi/xapi_handler.php'));
 $PAGE->set_context(context_system::instance());
 
 $statement = required_param('statement', PARAM_RAW);

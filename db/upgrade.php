@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Upgrade script for local_h5p_xapi plugin.
+ * Upgrade script for logstore_h5p_xapi plugin.
  *
- * @package    local_h5p_xapi
+ * @package    logstore_h5p_xapi
  * @copyright  2025 Alla Kutkina, Dr. Björn Rudzewitz,
  *             Hector Research Institute of Education Sciences and Psychology
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -29,31 +29,31 @@
  * @param int $oldversion
  * @return bool
  */
-function xmldb_local_h5p_xapi_upgrade($oldversion) {
+function xmldb_logstore_h5p_xapi_upgrade($oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager();
 
     if ($oldversion < 2025091206) {
 
-        // Define table local_h5p_xapi to be created.
-        $table = new xmldb_table('local_h5p_xapi');
+        // Define table logstore_h5p_xapi to be created.
+        $table = new xmldb_table('logstore_h5p_xapi');
 
-        // Adding fields to table local_h5p_xapi.
+        // Adding fields to table logstore_h5p_xapi.
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
         $table->add_field('timestamp', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
         $table->add_field('statement_data', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL, null, null);
 
-        // Adding keys to table local_h5p_xapi.
+        // Adding keys to table logstore_h5p_xapi.
         $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
 
-        // Conditionally launch create table for local_h5p_xapi.
+        // Conditionally launch create table for logstore_h5p_xapi.
         if (!$dbman->table_exists($table)) {
             $dbman->create_table($table);
         }
 
         // Upgrade savepoint reached.
-        upgrade_plugin_savepoint(true, 2025091206, 'local', 'h5p_xapi');
+        upgrade_plugin_savepoint(true, 2025131010, 'logstore', 'h5p_xapi');
     }
 
     return true;

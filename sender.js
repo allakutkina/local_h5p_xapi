@@ -16,7 +16,7 @@
 /**
  * This script listens for xAPI events from H5P content and sends them to a server-side handler.
  *
- * @package    local_h5p_xapi
+ * @package    logstore_h5p_xapi
  * @copyright  2025 Alla Kutkina, Dr. Björn Rudzewitz, 
  *             Hector Research Institute of Education Sciences and Psychology
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -74,7 +74,7 @@ window.onload = function() {
 
 function send($, statement) {
     $.ajax({
-        url: M.cfg.wwwroot + '/local/h5p_xapi/xapi_handler.php',
+        url: M.cfg.wwwroot + '/admin/tool/log/store/h5p_xapi/xapi_handler.php',
         type: 'POST',
         data: {
             sesskey: M.cfg.sesskey, // Include the session key for security
