@@ -29,7 +29,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($hassiteconfig) {
-    $settings = new admin_settingpage('h5p_xapi_settings', get_string('pluginname', 'logstore_h5p_xapi'));
+    $settings = new admin_settingpage('logstore_h5p_xapi_settings', get_string('pluginname', 'logstore_h5p_xapi'));
     $settings->add(
     new admin_setting_configtext('logstore_h5p_xapi/lrs_endpoint',
     get_string('lrs_endpoint', 'logstore_h5p_xapi'),
@@ -55,8 +55,6 @@ if ($hassiteconfig) {
         1)
     );
 }
-
-$ADMIN->add('logging', $settings);
 
 if ($hassiteconfig) {
     $ADMIN->add('logging', new admin_externalpage(
