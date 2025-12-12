@@ -36,6 +36,7 @@ window.onload = function() {
                 let statement = event.data.statement;
                 statement = addCourseId(statement);
                 statement = addTimestamp(statement);
+                statement = correctActivityId(statement);
                 send($, statement);
             });
         } 
@@ -114,5 +115,17 @@ function addCourseId(statement) {
 function addTimestamp(statement) {
     const timestamp = new Date().toISOString();
     statement.timestamp = timestamp;
+    return statement;
+}
+
+/**
+ * Corrects activity ID to the content URL. Used to obtain correct ID's for H5P content in iframes.
+ * 
+ * @param {Object} statement - The xAPI statement to modify.
+ * @returns {Object} The modified xAPI statement with activity ID changed.
+ */
+function correctActivityId(statement) {
+    const contentUrl = window.location.href;
+    statement.object.id = contentUrl;
     return statement;
 }
