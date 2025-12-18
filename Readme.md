@@ -8,6 +8,8 @@ To improve reliability, statements can be stored locally and resent later if del
 
 The H5P Experience Extractor plugin was designed to complement Logstore xAPI plugin https://moodle.org/plugins/logstore_xapi for a thorough coverage of Learning Analytics Data.
 
+This plugin was developed by members of the Hector Research Institute of Education Sciences and Psychology and is openly distributed; please acknowledge the authors in any publications that use it.
+
 Key features
 ------------
 - Listens for xAPI events from embedded H5P content (Both Moodle or Iframe).
