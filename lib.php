@@ -16,9 +16,9 @@
 
 /**
  *
- * Plugin functions for the logstore_h5p_xapi plugin.
+ * Plugin functions for the local_h5p_xapi plugin.
  *
- * @package    logstore_h5p_xapi
+ * @package    local_h5p_xapi
  *
  * @copyright  2025 Alla Kutkina, Dr. Björn Rudzewitz,
  *             Hector Research Institute of Education Sciences and Psychology
@@ -28,13 +28,13 @@
 
 /**
  * Callback function to include JavaScript on every page.
- * @package logstore_h5p_xapi
+ * @package local_h5p_xapi
  */
-function logstore_h5p_xapi_extend_navigation(global_navigation $navigation) {
+function local_h5p_xapi_extend_navigation(global_navigation $navigation) {
     global $PAGE;
 
     // Add the JavaScript file to every page.
-    $PAGE->requires->js('admin/tool/log/store/h5p_xapi/sender.js');
+    $PAGE->requires->js('/local/h5p_xapi/sender.js');
 }
 
 
@@ -56,10 +56,10 @@ function send_statement($statement) {
     }
     // Get plugin configuration settings.
 
-    $endpoint = get_config('logstore_h5p_xapi', 'lrs_endpoint') ?? 'https://example.com/lrs';
-    $username = get_config('logstore_h5p_xapi', 'lrs_username') ?? 'username';
-    $password = get_config('logstore_h5p_xapi', 'lrs_password') ?? 'password';
-    $useusername = get_config('logstore_h5p_xapi', 'id_schema') ?? 1;
+    $endpoint = get_config('local_h5p_xapi', 'lrs_endpoint') ?? 'https://example.com/lrs';
+    $username = get_config('local_h5p_xapi', 'lrs_username') ?? 'username';
+    $password = get_config('local_h5p_xapi', 'lrs_password') ?? 'password';
+    $useusername = get_config('local_h5p_xapi', 'id_schema') ?? 1;
     $url = $endpoint . '/statements';
 
     // Prepare the xAPI statement.
@@ -126,7 +126,7 @@ function store_statement($statement) {
     $data->timestamp = time();
     $data->statement_data = $statement;
     // Insert the statement into the database.
-    $DB->insert_record('logstore_h5p_xapi', $data);
+    $DB->insert_record('local_h5p_xapi', $data);
 }
 
 /**

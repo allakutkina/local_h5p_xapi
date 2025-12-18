@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMLDB PATH="admin/tool/log/store/h5p_xapi/db" VERSION="2025131008" COMMENT="H5P Experience Logstore database schema"
+<XMLDB PATH="local/h5p_xapi/db" VERSION="2025250805" COMMENT="H5P XAPI database schema"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
     <TABLES>
-        <TABLE NAME="logstore_h5p_xapi" COMMENT="Table for storing H5P xAPI statements">
+        <TABLE NAME="local_h5p_xapi" COMMENT="Table for storing H5P xAPI statements">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" SEQUENCE="true" NOTNULL="true" COMMENT="Statement ID"/>
                 <FIELD NAME="timestamp" TYPE= "int" LENGTH="10" SEQUENCE="false" NOTNULL="true" COMMENT="Statement stored timestamp"/>

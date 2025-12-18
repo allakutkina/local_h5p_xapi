@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language strings for the logstore_h5p_xapi plugin.
+ * Language strings for the local_h5p_xapi plugin.
  *
- * @package    logstore_h5p_xapi
+ * @package    local_h5p_xapi
  *
  * @copyright  2025 Alla Kutkina, Dr. Björn Rudzewitz,
  *             Hector Research Institute of Education Sciences and Psychology
@@ -33,7 +33,7 @@ $string['lrs_password'] = 'LRS Password';
 $string['lrs_password_desc'] = 'Enter the password for the LRS authentication.';
 $string['lrs_username'] = 'LRS Username';
 $string['lrs_username_desc'] = 'Enter the username for the LRS authentication.';
-$string['pluginname'] = 'H5P Experience Logstore';
+$string['pluginname'] = 'H5P xAPI LRS Plugin';
 $string['id_schema'] = 'Use username as identifier?';
 $string['id_schema_desc'] = 'Use the username as the identifier for xAPI statements. If unchecked, the email will be used instead.';
 $string['report'] = 'xAPI Statement Report';
