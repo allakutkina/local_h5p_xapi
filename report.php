@@ -65,7 +65,8 @@ if (optional_param('resendbatch', 0, PARAM_INT)) {
             $fail++;
         }
     }
-    $resendresult .= $OUTPUT->notification(get_string('batch_resend_result', 'local_h5p_xapi', ['success' => $success, 'fail' => $fail]), $fail ? 'notifyproblem' : 'notifysuccess');
+    $resendresult .= $OUTPUT->notification(get_string('batch_resend_result', 'local_h5p_xapi',
+        ['success' => $success, 'fail' => $fail]), $fail ? 'notifyproblem' : 'notifysuccess');
 }
 
 // Handle individual remove.
@@ -113,7 +114,7 @@ $table->head = [
     get_string('id', 'local_h5p_xapi'),
     get_string('timestamp', 'local_h5p_xapi'),
     get_string('statement', 'local_h5p_xapi'),
-    get_string('actions', 'local_h5p_xapi')
+    get_string('actions', 'local_h5p_xapi'),
 ];
 
 foreach ($records as $record) {
@@ -124,14 +125,15 @@ foreach ($records as $record) {
 
     $actions .= '<form method="post" action="' . $PAGE->url . '" style="display:inline">';
     $actions .= '<input type="hidden" name="removeid" value="' . $record->id . '" />';
-    $actions .= '<button type="submit" onclick="return confirm(\'' . get_string('confirm_remove', 'local_h5p_xapi') . '\');">' . get_string('remove', 'local_h5p_xapi') . '</button>';
+    $actions .= '<button type="submit" onclick="return confirm(\'' . get_string('confirm_remove', 'local_h5p_xapi') . '\');">' .
+        get_string('remove', 'local_h5p_xapi') . '</button>';
     $actions .= '</form>';
 
     $table->data[] = [
         $record->id,
         userdate($record->timestamp),
         '<pre style="max-width:400px;overflow:auto;">' . s($record->statement_data) . '</pre>',
-        $actions
+        $actions,
     ];
 }
 
