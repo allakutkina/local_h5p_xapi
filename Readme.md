@@ -1,9 +1,9 @@
-H5P Experience Extractor (local_h5p_xapi)
+H5P Experience Extractor <i>(local_h5p_xapi)</i>
 ======================================
 
 Overview
 --------
-H5P Experience Extractor is a local Moodle plugin that captures xAPI statements emitted exclusively by H5P content and forwards them to a specified Learning Record Store (LRS). 
+<b>H5P Experience Extractor</b> is a local Moodle plugin that captures xAPI statements emitted exclusively by H5P content and forwards them to a specified Learning Record Store (LRS). 
 To improve reliability, statements can be stored locally and resent later if delivery to the LRS fails.
 
 The H5P Experience Extractor plugin was designed to complement the <a href="https://moodle.org/plugins/logstore_xapi">Logstore xAPI plugin</a> for a thorough coverage of Learning Analytics Data. While the Logstore xAPI plugin captures generic Moodle events and emits them as xAPI statements, this plugin is designed to capture detailed interaction events from H5P activities.
@@ -24,7 +24,7 @@ Requirements
 ------------
 - Moodle: tested on Moodle 4.5
 - A Learning Record Store, for example <a href="https://www.sqllrs.com/">SQL LRS</a>
-  It is important that the LRS endpoint for recieving statements follows the convention of ending in <i>...xapi/statements</i>
+  It is important that the LRS endpoint for recieving statements follows the convention of ending in ...xapi/statements
 - For complete user activity coverage additionally: <a href="https://moodle.org/plugins/logstore_xapi">Logstore xAPI plugin</a>
 
 Installation
