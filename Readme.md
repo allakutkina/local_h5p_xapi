@@ -6,13 +6,13 @@ Overview
 H5P Experience Extractor is a local Moodle plugin that captures xAPI statements emitted exclusively by H5P content and forwards them to a specified Learning Record Store (LRS). 
 To improve reliability, statements can be stored locally and resent later if delivery to the LRS fails.
 
-The H5P Experience Extractor plugin was designed to complement Logstore xAPI plugin https://moodle.org/plugins/logstore_xapi for a thorough coverage of Learning Analytics Data.
+The H5P Experience Extractor plugin was designed to complement the <a href="https://moodle.org/plugins/logstore_xapi">Logstore xAPI plugin</a> for a thorough coverage of Learning Analytics Data. While the Logstore xAPI plugin captures generic Moodle events and emits them as xAPI statements, this plugin is designed to capture detailed interaction events from H5P activities.
 
-This plugin was developed by members of the Hector Research Institute of Education Sciences and Psychology and is openly distributed; please acknowledge the authors in any publications that use it.
+This plugin was developed by members of the <a href="https://uni-tuebingen.de/de/80946">Hector Research Institute of Education Sciences and Psychology</a> and is openly distributed; please acknowledge the authors in any publications that use it (see citation below).
 
 Key features
 ------------
-- Listens for xAPI events from embedded H5P content (Both Moodle or Iframe).
+- Listens for xAPI events from embedded H5P content (Both Moodle or iframe).
 - Sends statements to a configurable LRS endpoint.
 - Stores failed statements in a Moodle DB table for later retry.
 - Admin report page with:
@@ -23,28 +23,28 @@ Key features
 Requirements
 ------------
 - Moodle: tested on Moodle 4.5
-- A Learning Record Store, for example https://www.sqllrs.com/ 
-  It is important that the LRS endpoint for recieving statements follows the convention of ending in ...xapi/statements
-- For complete user activity coverage: https://moodle.org/plugins/logstore_xapi
+- A Learning Record Store, for example <a href="https://www.sqllrs.com/">SQL LRS</a>
+  It is important that the LRS endpoint for recieving statements follows the convention of ending in <i>...xapi/statements</i>
+- For complete user activity coverage additionally: <a href="https://moodle.org/plugins/logstore_xapi">Logstore xAPI plugin</a>
 
 Installation
 ------------
 1. Download the plugin as a zip archive 
-2. Visit Site administration → Install Plugins -> Install Plugins -> Install plugin from ZIP file
-3. Configure LRS settings either after the installation or in Site administration → Plugins → local plugins → H5P xAPI (or via the plugin settings page).
+2. Visit <i>Site administration</i> → <i>Install Plugins</i> → <i>Install Plugins</i> → <i>Install plugin from ZIP file</i>
+3. Configure LRS settings either after the installation or in <i>Site administration</i> → <i>Plugins</i> → <i>local plugins</i> → <i>H5P xAPI</i> (or via the plugin settings page).
 
 Configuration
 -------------
 Plugin settings (admin UI):
-- lrs_endpoint — The base URL of your LRS (e.g. https://lrs.example.org/lrs).
-- lrs_username — LRS credentials key.
-- lrs_password — LRS credentials password.
-- id_schema — Option to choose how actor IDs are mapped (username vs email). Set with the plugin settings.
+- <i>lrs_endpoint</i> — The base URL of your LRS (e.g. https://lrs.example.org/lrs).
+- <i>lrs_username</i> — LRS credentials key.
+- <i>lrs_password</i> — LRS credentials password.
+- <i>id_schema</i> — Option to choose how actor IDs are mapped (username vs email). Set with the plugin settings.
 
 Accessing the report page
 -------------------------
 From Moodle Plugin menu:
-Admin -> Plugins -> Local -> H5P Experience Report
+<i>Admin</i> -> <i>Plugins</i> -> <i>Local</i> -> <i>H5P Experience Report</i>
 Report page URL:
 - /local/h5p_xapi/report.php
 
@@ -67,7 +67,7 @@ Please cite
 If you use this plugin or its data in a publication, please acknowledge it.
 
 APA:
-Kutkina, A., & Rudzewitz, B. (2025). H5P Experience Extractor (local_h5p_xapi) [Moodle plugin]. Hector Research Institute of Education Sciences and Psychology. https://github.com/allakutkina/h5p_xapi
+Kutkina, A., & Rudzewitz, B. (2025). H5P Experience Extractor (local_h5p_xapi) [Moodle plugin]. <i>Hector Research Institute of Education Sciences and Psychology</i>. https://github.com/allakutkina/h5p_xapi
 
 BibTeX:
 @misc{kutkina2025h5p,
