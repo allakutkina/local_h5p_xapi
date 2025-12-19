@@ -6,13 +6,13 @@ Overview
 <b>H5P Experience Extractor</b> is a local Moodle plugin that captures xAPI statements emitted exclusively by H5P content and forwards them to a specified Learning Record Store (LRS). 
 To improve reliability, statements can be stored locally and resent later if delivery to the LRS fails.
 
-The H5P Experience Extractor plugin was designed to complement the <a href="https://moodle.org/plugins/logstore_xapi">Logstore xAPI plugin</a> for a thorough coverage of Learning Analytics Data. While the Logstore xAPI plugin captures generic Moodle events and emits them as xAPI statements, this plugin is designed to capture detailed interaction events from H5P activities.
+The H5P Experience Extractor plugin was designed to complement the <a href="https://moodle.org/plugins/logstore_xapi">Logstore xAPI plugin</a> for a thorough coverage of Learning Analytics data. While the Logstore xAPI plugin captures generic Moodle events and emits them as xAPI statements, this plugin is designed to capture detailed interaction events from H5P activities.
 
 This plugin was developed by members of the <a href="https://uni-tuebingen.de/de/80946">Hector Research Institute of Education Sciences and Psychology</a> and is openly distributed; please acknowledge the authors in any publications that use it (see citation below).
 
 Key features
 ------------
-- Listens for xAPI events from embedded H5P content (Both Moodle or iframe).
+- Listens for xAPI events from embedded H5P content (both Moodle or iframe).
 - Sends statements to a configurable LRS endpoint.
 - Stores failed statements in a Moodle DB table for later retry.
 - Admin report page with:
@@ -66,10 +66,10 @@ Please cite
 -----------
 If you use this plugin or its data in a publication, please acknowledge it.
 
-APA:
+APA:<br>
 Kutkina, A., & Rudzewitz, B. (2025). H5P Experience Extractor (local_h5p_xapi) [Moodle plugin]. <i>Hector Research Institute of Education Sciences and Psychology</i>. https://github.com/allakutkina/h5p_xapi
 
-BibTeX:
+BibTeX:<br>
 @misc{kutkina2025h5p,
   author = {Kutkina, Alla and Rudzewitz, Björn},
   title = {H5P Experience Extractor (local_h5p_xapi)},
@@ -82,5 +82,6 @@ BibTeX:
 
 Contact
 -----------------------
+- We are open to collaboration with the community regarding the plugin.
 - Please open new issues in this repository if you want to report bugs or suggest improvements. 
   Include reproducible steps and any relevant logs when reporting bugs.
