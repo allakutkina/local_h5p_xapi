@@ -132,7 +132,6 @@ function store_statement($statement) {
 /**
  * this function is responsible for re-sending failed xAPI statements
  * to the LRS (Learning Record Store).
- * @param string statment
  */
 function resend_statements() {
     // Retrieve unsent statements from the database.
