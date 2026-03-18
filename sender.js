@@ -30,19 +30,15 @@
 window.onload = function() {
     require(['jquery'], function($) {
         if (typeof H5P !== 'undefined' && typeof H5P.externalDispatcher !== 'undefined') {
-            // listen for xAPI events from H5P content
             H5P.externalDispatcher.on('xAPI', (event) => {
                 let statement = event.data.statement;
                 statement = validateStatement(statement);
                 send($, statement);
             });
         } 
-        
-        // Check in case there is an Iframe that contains H5P content
+    
         else if (document.getElementsByTagName('iframe').length > 0) {
-            // listen for xAPI events from H5P content in an iframe
             var iframes = document.getElementsByTagName('iframe');
-            // loop through all iframes
             for (var i = 0; i < iframes.length; i++) { 
                 if (iframes[i].src.indexOf('h5p') !== -1) {    
                     iframes[i].contentWindow.H5P.externalDispatcher.on('xAPI', (event) => {
@@ -69,7 +65,7 @@ function send($, statement) {
         url: M.cfg.wwwroot + '/local/h5p_xapi/xapi_handler.php',
         type: 'POST',
         data: {
-            sesskey: M.cfg.sesskey, // Include the session key for security
+            sesskey: M.cfg.sesskey,
             statement: JSON.stringify(statement)
         },
         error: function (xhr, status, error) {
@@ -111,7 +107,7 @@ function addCourseId(statement) {
  */
 function validateActivityId(statement) {
     if (statement.object.id !== window.location.href) {
-        statement.object.id = window.location.href; // Use the current URL as the activity ID if it's not set
+        statement.object.id = window.location.href; 
     }
     return statement;
 }
