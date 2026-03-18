@@ -110,7 +110,7 @@ function addCourseId(statement) {
  * @returns {Object} The modified xAPI statement with activity ID checked.
  */
 function validateActivityId(statement) {
-    if (!statement.object.id == window.location.href) {
+    if (statement.object.id !== window.location.href) {
         statement.object.id = window.location.href; // Use the current URL as the activity ID if it's not set
     }
     return statement;
