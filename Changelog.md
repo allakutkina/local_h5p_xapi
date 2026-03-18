@@ -1,3 +1,12 @@
+# Release 1.1
+
+- release version: 1.1
+- code state version: 2025121900
+- first public release/open sourcing
+- updated Readme with more details
+- improved documentation
+- more testing conducted to ensure stability
+
 # Release 1.0
 
 - release version: 1.0
