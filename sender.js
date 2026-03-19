@@ -30,38 +30,25 @@
 window.onload = function() {
     require(['jquery'], function($) {
         if (typeof H5P !== 'undefined' && typeof H5P.externalDispatcher !== 'undefined') {
-            // listen for xAPI events from H5P content
             H5P.externalDispatcher.on('xAPI', (event) => {
-                console.log("caught xAPI event");
                 let statement = event.data.statement;
-                statement = addCourseId(statement);
-                statement = addTimestamp(statement);
-                statement = correctActivityId(statement);
+                statement = validateStatement(statement);
                 send($, statement);
             });
         } 
-        
-        // Check in case there is an Iframe that contains H5P content
+    
         else if (document.getElementsByTagName('iframe').length > 0) {
-            // listen for xAPI events from H5P content in an iframe
             var iframes = document.getElementsByTagName('iframe');
-            // loop through all iframes
             for (var i = 0; i < iframes.length; i++) { 
                 if (iframes[i].src.indexOf('h5p') !== -1) {    
                     iframes[i].contentWindow.H5P.externalDispatcher.on('xAPI', (event) => {
                         let statement = event.data.statement;
-                        statement = addCourseId(statement); // Add course ID to the statement
-                        statement = addTimestamp(statement);
+                        statement = validateStatement(statement);
                         send($, statement);
                     });
                 }
             }
         }
-        else{
-
-            console.warn('No H5P content here.');
-        }
-    
     });
 }
 
@@ -78,17 +65,23 @@ function send($, statement) {
         url: M.cfg.wwwroot + '/local/h5p_xapi/xapi_handler.php',
         type: 'POST',
         data: {
-            sesskey: M.cfg.sesskey, // Include the session key for security
+            sesskey: M.cfg.sesskey,
             statement: JSON.stringify(statement)
-        },
-        success: function (response) {
-            console.log('xAPI statement sent:', response);
         },
         error: function (xhr, status, error) {
             console.error('Failed to send xAPI statement:', error);
         }
     });
 }
+
+function validateStatement(statement) {
+    statement = addCourseId(statement);
+    statement = validateActivityId(statement);
+    statement = validateChoiceIds(statement);
+    statement = addTimestamp(statement);
+    return statement;
+}
+
 
 /**
  * Adds the course ID to the xAPI statement's context.
@@ -107,6 +100,37 @@ function addCourseId(statement) {
 }
 
 /**
+ * Checks if the xAPI statement has an activity ID and sets it to the current URL if it's not set.
+ *
+ * @param {Object} statement - The xAPI statement to check and modify.
+ * @returns {Object} The modified xAPI statement with activity ID checked.
+ */
+function validateActivityId(statement) {
+    if (statement.object.id !== window.location.href) {
+        statement.object.id = window.location.href; 
+    }
+    return statement;
+}
+
+/**
+ * Validates the choice IDs in the xAPI statement's object definition and converts them to strings if they are not already.
+ *
+ * @param {Object} statement - The xAPI statement to validate.
+ * @returns {Object} The modified xAPI statement with validated choice IDs.
+ */
+function validateChoiceIds(statement) {
+    if (statement.object.definition && statement.object.definition.choices) {
+        statement.object.definition.choices.forEach((choice, index) => {
+            // validate the type of choice id
+            if (typeof choice.id !== 'string') {
+                choice.id = choice.id.toString();
+            }
+        });
+    }
+    return statement;
+}
+
+/**
  * Adds a timestamp to the xAPI statement.
  *
  * @param {Object} statement - The xAPI statement to modify.
@@ -115,17 +139,5 @@ function addCourseId(statement) {
 function addTimestamp(statement) {
     const timestamp = new Date().toISOString();
     statement.timestamp = timestamp;
-    return statement;
-}
-
-/**
- * Corrects activity ID to the content URL. Used to obtain correct ID's for H5P content in iframes.
- * 
- * @param {Object} statement - The xAPI statement to modify.
- * @returns {Object} The modified xAPI statement with activity ID changed.
- */
-function correctActivityId(statement) {
-    const contentUrl = window.location.href;
-    statement.object.id = contentUrl;
     return statement;
 }

@@ -34,7 +34,7 @@ function xmldb_local_h5p_xapi_upgrade($oldversion) {
 
     $dbman = $DB->get_manager();
 
-    if ($oldversion < 2025121900) {
+    if ($oldversion < 2026031800) {
 
         // Define table local_h5p_xapi to be created.
         $table = new xmldb_table('local_h5p_xapi');
@@ -53,7 +53,7 @@ function xmldb_local_h5p_xapi_upgrade($oldversion) {
         }
 
         // Upgrade savepoint reached.
-        upgrade_plugin_savepoint(true, 2025121900, 'local', 'h5p_xapi');
+        upgrade_plugin_savepoint(true, 2026031800, 'local', 'h5p_xapi');
     }
 
     return true;
