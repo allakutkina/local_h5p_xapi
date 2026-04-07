@@ -137,14 +137,14 @@ function resend_statements() {
     // Retrieve unsent statements from the database.
 
     global $DB;
-    $unsentstatements = $DB->get_records('h5p_xapi');
+    $unsentstatements = $DB->get_records('local_h5p_xapi');
 
     foreach ($unsentstatements as $statement) {
         $response = send_statement(json_decode($statement->statement_data));
 
         if ($response) {
             // Instead of marking as sent, we delete the record.
-            $DB->delete_records('h5p_xapi', ['id' => $statement->id]);
+            $DB->delete_records('local_h5p_xapi', ['id' => $statement->id]);
         }
     }
 }
