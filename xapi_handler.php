@@ -35,7 +35,7 @@ $PAGE->set_context(context_system::instance());
 $statement = required_param('statement', PARAM_RAW);
 
 // Send the statement to the LRS (function defined in lib.php).
-$result = send_statement($statement);
+$result = local_h5p_xapi_send_statement($statement);
 
 // Return the response from the LRS.
 // If returns error, store in the db.
