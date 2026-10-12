@@ -29,7 +29,7 @@
  * @param int $oldversion
  * @return bool
  */
-function xmldb_local_h5p_xapi_upgrade($oldversion) {
+function local_h5p_xapi_xmldb_upgrade($oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager();
