@@ -32,8 +32,8 @@ window.onload = function() {
         if (typeof H5P !== 'undefined' && typeof H5P.externalDispatcher !== 'undefined') {
             H5P.externalDispatcher.on('xAPI', (event) => {
                 let statement = event.data.statement;
-                statement = validateStatement(statement);
-                send($, statement);
+                statement = local_h5p_xapi_validateStatement(statement);
+                local_h5p_xapi_send($, statement);
             });
         } 
     
@@ -43,8 +43,8 @@ window.onload = function() {
                 if (iframes[i].src.indexOf('h5p') !== -1) {    
                     iframes[i].contentWindow.H5P.externalDispatcher.on('xAPI', (event) => {
                         let statement = event.data.statement;
-                        statement = validateStatement(statement);
-                        send($, statement);
+                        statement = local_h5p_xapi_validateStatement(statement);
+                        local_h5p_xapi_send($, statement);
                     });
                 }
             }
@@ -60,7 +60,7 @@ window.onload = function() {
  * @param {Object} statement - The xAPI statement to send.
  */
 
-function send($, statement) {
+function local_h5p_xapi_send($, statement) {
     $.ajax({
         url: M.cfg.wwwroot + '/local/h5p_xapi/xapi_handler.php',
         type: 'POST',
@@ -74,11 +74,11 @@ function send($, statement) {
     });
 }
 
-function validateStatement(statement) {
-    statement = addCourseId(statement);
-    statement = validateActivityId(statement);
-    statement = validateChoiceIds(statement);
-    statement = addTimestamp(statement);
+function local_h5p_xapi_validateStatement(statement) {
+    statement = local_h5p_xapi_addCourseId(statement);
+    statement = local_h5p_xapi_validateActivityId(statement);
+    statement = local_h5p_xapi_validateChoiceIds(statement);
+    statement = local_h5p_xapi_addTimestamp(statement);
     return statement;
 }
 
@@ -90,7 +90,7 @@ function validateStatement(statement) {
  * @returns {Object} The modified xAPI statement with course ID added.
  */
 
-function addCourseId(statement) {
+function local_h5p_xapi_addCourseId(statement) {
     const courseId = M.cfg.courseId; // Retrieve the course ID from the Moodle configuration
     if (courseId) {
         statement.context.contextActivities = statement.context.contextActivities || {}
@@ -105,7 +105,7 @@ function addCourseId(statement) {
  * @param {Object} statement - The xAPI statement to check and modify.
  * @returns {Object} The modified xAPI statement with activity ID checked.
  */
-function validateActivityId(statement) {
+function local_h5p_xapi_validateActivityId(statement) {
     if (statement.object.id !== window.location.href) {
         statement.object.id = window.location.href; 
     }
@@ -118,7 +118,7 @@ function validateActivityId(statement) {
  * @param {Object} statement - The xAPI statement to validate.
  * @returns {Object} The modified xAPI statement with validated choice IDs.
  */
-function validateChoiceIds(statement) {
+function local_h5p_xapi_validateChoiceIds(statement) {
     if (statement.object.definition && statement.object.definition.choices) {
         statement.object.definition.choices.forEach((choice, index) => {
             // validate the type of choice id
@@ -136,7 +136,7 @@ function validateChoiceIds(statement) {
  * @param {Object} statement - The xAPI statement to modify.
  * @returns {Object} The modified xAPI statement with timestamp added.
  */
-function addTimestamp(statement) {
+function local_h5p_xapi_addTimestamp(statement) {
     const timestamp = new Date().toISOString();
     statement.timestamp = timestamp;
     return statement;
