@@ -43,7 +43,7 @@ $resendresult = '';
 if ($resendid) {
     $record = $DB->get_record('local_h5p_xapi', ['id' => $resendid]);
     if ($record) {
-        $result = send_statement($record->statement_data);
+        $result = local_h5p_xapi_send_statement($record->statement_data);
         if ($result && isset($result['httpcode']) && $result['httpcode'] == 200) {
             $resendresult = $OUTPUT->notification(get_string('resend_success', 'local_h5p_xapi'), 'notifysuccess');
         } else {
@@ -58,7 +58,7 @@ if (optional_param('resendbatch', 0, PARAM_INT)) {
     $success = 0;
     $fail = 0;
     foreach ($records as $record) {
-        $result = send_statement($record->statement_data);
+        $result = local_h5p_xapi_send_statement($record->statement_data);
         if ($result && isset($result['httpcode']) && $result['httpcode'] == 200) {
             $success++;
         } else {
