@@ -41,8 +41,8 @@ function local_h5p_xapi_xmldb_upgrade($oldversion) {
 
         // Adding fields to table local_h5p_xapi.
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
-        $table->add_field('timestamp', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
-        $table->add_field('statement_data', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL, null, null);
+        $table->add_field('timecreated ', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('statementdata', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL, null, null);
 
         // Adding keys to table local_h5p_xapi.
         $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
