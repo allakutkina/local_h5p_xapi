@@ -44,7 +44,7 @@ function local_h5p_xapi_extend_navigation(global_navigation $navigation) {
  * @param array $statement The xAPI statement to send.
  * @return string The response from the LRS.
  */
-function send_statement($statement) {
+function local_h5p_xapi_send_statement($statement) {
     $statementdata = json_decode($statement, true);
     if (empty($statementdata) ||
             !array_key_exists('actor', $statementdata) ||
@@ -117,7 +117,7 @@ function send_statement($statement) {
  * Methods that stores data in database
  * @param string statment
  */
-function store_statement($statement) {
+function local_h5p_xapi_store_statement($statement) {
     global $DB;
 
     // Prepare the statement data for storage.
@@ -133,14 +133,14 @@ function store_statement($statement) {
  * this function is responsible for re-sending failed xAPI statements
  * to the LRS (Learning Record Store).
  */
-function resend_statements() {
+function local_h5p_xapi_resend_statements() {
     // Retrieve unsent statements from the database.
 
     global $DB;
     $unsentstatements = $DB->get_records('local_h5p_xapi');
 
     foreach ($unsentstatements as $statement) {
-        $response = send_statement(json_decode($statement->statement_data));
+        $response = local_h5p_xapi_send_statement(json_decode($statement->statement_data));
 
         if ($response) {
             // Instead of marking as sent, we delete the record.
