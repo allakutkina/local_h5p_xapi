@@ -45,13 +45,13 @@ if ($result) {
         echo json_encode(['success' => true, 'response' => $result['response']]);
     } else {
         echo json_encode(['success' => false, 'response' => $result['response']]);
-        store_statement($statement); // Store the statement in case of failure.
+        local_h5p_xapi_store_statement($statement); // Store the statement in case of failure.
     }
 } else {
     http_response_code(503); // Service Unavailable.
 
     echo json_encode(['error' => 'LRS is unavailable or did not respond']);
-    store_statement($statement); // Store the statement in case of failure.
+    local_h5p_xapi_store_statement($statement); // Store the statement in case of failure.
 
 }
 
