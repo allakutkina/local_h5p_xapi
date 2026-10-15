@@ -25,6 +25,13 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['actions'] = 'Actions';
+$string['all_statements_removed'] = 'All statements removed successfully.';
+$string['batch_resend_result'] = 'Batch resend complete: {$a->success} succeeded, {$a->fail} failed.';
+$string['clear_all'] = 'Clear All';
+$string['confirm_clear_all'] = 'Are you sure you want to remove all statements?';
+$string['confirm_remove'] = 'Are you sure you want to remove this statement?';
+$string['id'] = 'ID';
 $string['id_schema'] = 'Use username as identifier?';
 $string['id_schema_desc'] = 'Use the username as the identifier for xAPI statements. If unchecked, the email will be used instead.';
 $string['lrs_endpoint'] = 'LRS Endpoint URL';
@@ -34,19 +41,14 @@ $string['lrs_password_desc'] = 'Enter the password for the LRS authentication.';
 $string['lrs_username'] = 'LRS Username';
 $string['lrs_username_desc'] = 'Enter the username for the LRS authentication.';
 $string['pluginname'] = 'H5P Experience Extractor';
+$string['remove'] = 'Remove';
 $string['report'] = 'H5P Experience Report';
 $string['resend'] = 'Resend';
 $string['resend_all'] = 'Resend All';
-$string['batch_resend_result'] = 'Batch resend complete: {$a->success} succeeded, {$a->fail} failed.';
 $string['resend_failed'] = 'Failed to resend statement';
 $string['resend_success'] = 'Statement resent successfully!';
-$string['id'] = 'ID';
-$string['actions'] = 'Actions';
 $string['statement'] = 'Statement';
-$string['timestamp'] = 'Timestamp';
-$string['clear_all'] = 'Clear All';
-$string['remove'] = 'Remove';
 $string['statement_removed'] = 'Statement removed successfully.';
-$string['all_statements_removed'] = 'All statements removed successfully.';
-$string['confirm_clear_all'] = 'Are you sure you want to remove all statements?';
-$string['confirm_remove'] = 'Are you sure you want to remove this statement?';
+$string['timestamp'] = 'Timestamp';
+
+
