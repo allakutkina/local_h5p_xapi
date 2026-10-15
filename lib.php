@@ -39,10 +39,10 @@ function local_h5p_xapi_extend_navigation(global_navigation $navigation) {
 
 
 /**
- * Function to send xAPI statement to the LRS.
+ * Function to send xAPI $statement to the LRS.
  *
  * @param array $statement The xAPI statement to send.
- * @return string The response from the LRS.
+ * @return array The response from the LRS.
  */
 function local_h5p_xapi_send_statement($statement) {
     $statementdata = json_decode($statement, true);
@@ -114,7 +114,7 @@ function local_h5p_xapi_send_statement($statement) {
 }
 
 /**
- * Methods that stores data in database
+ * Methods that store data in database
  * @param string statment
  */
 function local_h5p_xapi_store_statement($statement) {
