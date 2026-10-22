@@ -26,6 +26,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+global $CFG;
+
+require_once($CFG->libdir . '/filelib.php');
+
+
 /**
  * Callback function to include JavaScript on every page.
  * @package local_h5p_xapi
@@ -80,39 +85,49 @@ function local_h5p_xapi_send_statement($statement) {
             , ];
     }
 
+
     // CURL setup.
+    $curl = new \curl();
 
-    $ch = curl_init($url);
-
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    // Set the request headers.
+    $curl->setHeader([
         'Authorization: Basic ' . base64_encode($username . ':' . $password),
         'Content-Type: application/json',
         'X-Experience-API-Version: 1.0.3',
     ]);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($statementdata));
 
-    // Send request and capture the response.
+    // Set cURL options.
+    $curl->setopt([
+        'CURLOPT_TIMEOUT' => 5,
+    ]);
 
-    $response = curl_exec($ch);
-    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    // Encode the xAPI statement as JSON.
+    $jsondata = json_encode($statementdata);
 
-    // Fix this: it returns not found from the moodle, not the information from the LRS.
-
-    if (curl_errno($ch)) {
-        // Log error if needed.
-
-        mtrace('cURL Error: ' . curl_error($ch));
+    if ($jsondata === false) {
+        throw new \moodle_exception('errorencoding', 'core');
     }
-    curl_close($ch);
 
-    // Return both the response and the HTTP code.
+    // Send the POST request.
+    $response = $curl->post($url, $jsondata);
 
-    return [
-        'httpcode' => $httpcode,
-        'response' => $response];
+    // Retrieve the HTTP response code.
+    $info = $curl->get_info();
+    $httpcode = $info['http_code'] ?? 0;
+
+    // Check the result.
+    if ($curl->get_errno()) {
+        debugging(
+            'cURL error: ' . $curl->error,
+            DEBUG_DEVELOPER
+        );
+    } else if ($httpcode < 200 || $httpcode >= 300) {
+        debugging(
+            'xAPI request failed. HTTP status: ' . $httpcode .
+            '. Response: ' . $response,
+            DEBUG_DEVELOPER
+        );
+    }
 }
 
 /**
