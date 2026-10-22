@@ -27,7 +27,7 @@
  * Initializes the script when the window loads and sets up event listeners for xAPI events.
  */
 
-window.onload = function() {
+function GetStatment() {
     require(['jquery'], function($) {
         if (typeof H5P !== 'undefined' && typeof H5P.externalDispatcher !== 'undefined') {
             H5P.externalDispatcher.on('xAPI', (event) => {
@@ -51,6 +51,10 @@ window.onload = function() {
         }
     });
 }
+
+
+
+window.addEventListener("load", GetStatment);
 
 
 /**
