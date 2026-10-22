@@ -83,7 +83,9 @@ function local_h5p_xapi_send_statement($statement) {
     // CURL setup.
 
     $ch = curl_init($url);
+
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 5);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         'Authorization: Basic ' . base64_encode($username . ':' . $password),
         'Content-Type: application/json',

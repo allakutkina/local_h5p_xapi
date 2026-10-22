@@ -43,8 +43,10 @@ if ($hassiteconfig) {
     get_string('lrs_username_desc', 'local_h5p_xapi'),
     'username', PARAM_TEXT));
 
+    //added hidden field
+
     $settings->add(
-    new admin_setting_configtext('local_h5p_xapi/lrs_password',
+    new admin_setting_configpasswordunmask('local_h5p_xapi/lrs_password',
     get_string('lrs_password', 'local_h5p_xapi'),
     get_string('lrs_password_desc', 'local_h5p_xapi'),
     'password', PARAM_TEXT));
