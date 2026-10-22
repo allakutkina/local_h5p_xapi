@@ -69,6 +69,8 @@ function local_h5p_xapi_send_statement($statement) {
 
     // Prepare the xAPI statement.
 
+    //Problem: When an admin clicks "Resend" in report.php, the actor becomes the administrator, not the original student
+
     global $USER;
     $email = $USER->email;
     $user = $USER->username;
@@ -81,8 +83,13 @@ function local_h5p_xapi_send_statement($statement) {
             'account' => [
                 'name' => $user,
                 'homePage' => $moodleurl,
-            ]
-            , ];
+            ],
+        ];
+    } else {
+        $statementdata['actor'] = [
+            'objectType' => 'Agent',
+            'mbox' => $email,
+        ];
     }
 
 
