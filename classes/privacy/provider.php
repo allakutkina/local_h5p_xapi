@@ -26,7 +26,7 @@
 // ToDo: Fix user contexts only unse one userid
 
 
-namespace local_h5p_xapi;
+namespace local_h5p_xapi\privacy;
 
 use context;
 use core_privacy\local\metadata\collection;
@@ -57,7 +57,7 @@ use tool_log\local\privacy\helper;
 class provider implements
     \core_privacy\local\metadata\provider,
     \tool_log\local\privacy\logstore_provider,
-    \tool_log\local\privacy\logstore_userlist_provider {
+    \core_privacy\local\request\core_userlist_provider {
     /** @var string[] The tables holding event data. */
     private const TABLES = [
         'local_h5p_xapi',
