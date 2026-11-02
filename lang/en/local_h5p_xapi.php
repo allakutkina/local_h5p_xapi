@@ -41,6 +41,10 @@ $string['lrs_password_desc'] = 'Enter the password for the LRS authentication.';
 $string['lrs_username'] = 'LRS Username';
 $string['lrs_username_desc'] = 'Enter the username for the LRS authentication.';
 $string['pluginname'] = 'H5P Experience Extractor';
+$string['privacy:metadata:local_h5p_xapi'] = 'The H5P xAPI plugin stores statements generated from H5P activity.';
+$string['privacy:metadata:local_h5p_xapi:id'] = 'The database record identifier for the stored statement.';
+$string['privacy:metadata:local_h5p_xapi:statementdata'] = 'The xAPI statement data, which may contain information about the user and their H5P activity.';
+$string['privacy:metadata:local_h5p_xapi:timecreated'] = 'The time when the statement was stored.';
 $string['remove'] = 'Remove';
 $string['report'] = 'H5P Experience Report';
 $string['resend'] = 'Resend';
@@ -50,5 +54,4 @@ $string['resend_success'] = 'Statement resent successfully!';
 $string['statement'] = 'Statement';
 $string['statement_removed'] = 'Statement removed successfully.';
 $string['timestamp'] = 'Timestamp';
-
 
