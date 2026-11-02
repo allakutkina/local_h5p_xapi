@@ -89,7 +89,8 @@ class provider implements
                 $table,
                 [
                     'id' => 'privacy:metadata:' . $table . ':id',
-                    'statement_data' => 'privacy:metadata:' . $table . ':statement_data',
+                    'statementdata' => 'privacy:metadata:' . $table . ':statementdata',
+                    'timecreated' => 'privacy:metadata' . $table . ':timecreated',
 
                 ],
                 'privacy:metadata:' . $table
